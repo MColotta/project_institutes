@@ -2,53 +2,36 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Read JSON File</title>
 <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow&display=swap" rel="stylesheet">  
 <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"> 
-<link rel="stylesheet" href="styles.css" />
-<script src="jquery-3.3.1.min.js"></script>
+<link rel="stylesheet" href="styles/style_institutes.css" />
+<title>Read JSON File</title>
 </head>
-<body>
-	<button>Mostrar JSON</button>
-	<script>
-		$('button')
-				.click(
-						function() {
-							$('button').remove();
-							$
-									.getJSON(
-											"social.json",
-											function(datos) {
-												for ( let i in datos.institutes) {
-													$('body').append("<br>");
-													$('body')
-															.append('<h1>'+
-																	"Institución: "
-																			+ "<span>"
-																			+ datos.institutes[i].username
-																			+ "</span>"+ '</h1>');
-													$('body')
-															.append(
-																	'<h3>Lista de Redes Sociales</h3>');
-													for ( let j in datos.institutes[i].social_media) {
-														$('body')
-																.append("<br>");
-														$('body')
-																.append(
-																		datos.institutes[i].social_media[j].description);
-														$('body')
-																.append(
-																		" : "
-																				+ "<span>"
-																				+ datos.institutes[i].social_media[j].link
-																				+ "</span>");
-														
-													}
-													$('body').append("<br>");
-												}
 
-											});
-						});
-	</script>
+<body>
+<button>Mostrar JSON</button>
+
+<script src="jquery-3.3.1.min.js"></script>
+<script>
+	$('button').click(function() {
+		$('button').remove();
+		$.getJSON("social.json", function(datos) {
+			for ( let i in datos.institutes) {
+				$('body').append("<br>");
+				$('body').append('<h1>'+"Institución: " + "<span>" + datos.institutes[i].username + "</span>"+ '</h1>');
+				$('body').append('<h3>Lista de Redes Sociales</h3>');
+				for ( let j in datos.institutes[i].social_media) {
+					$('body').append("<br>");
+					$('body').append('<span>' + datos.institutes[i].social_media[j].description + " : " + "</span>" + "<span>" + datos.institutes[i].social_media[j].link +'</span>');
+					//$('body').append(" : " + "<span>" + datos.institutes[i].social_media[j].link + "</span>");
+				}
+				$('body').append("<br>");
+			}
+		});
+	});
+	
+/*para acceder al enlace de la primer red social de la pimer institucion:
+datos.institutes[0].social_media[0].link */
+</script>
 </body>
 </html>
